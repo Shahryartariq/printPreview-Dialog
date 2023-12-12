@@ -7,45 +7,130 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
     <style>
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1050;
+        display: none;
+      }
 
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5); 
-      z-index: 1050; 
-      display: none;
-    }
+      .custom-button {
+        display: inline-block !important;
+        padding: 10px 20px !important;
+        font-size: 16px !important;
+        font-weight: bold !important;
+        text-align: center !important;
+        text-decoration: none !important;
+        cursor: pointer !important;
+        border: 2px solid #000 !important; /* Border color */
+        color: #000 !important; /* Text color */
+        background-color: #fff !important; /* Background color */
+        border-radius: 5px !important; /* Rounded corners */
+        transition: background-color 0.3s, color 0.3s !important;
+      }
 
-    .custom-button {
-      display: inline-block !important;
-      padding: 10px 20px !important;
-      font-size: 16px !important;
-      font-weight: bold !important;
-      text-align: center !important;
-      text-decoration: none !important;
-      cursor: pointer !important;
-      border: 2px solid #000 !important; /* Border color */
-      color: #000 !important; /* Text color */
-      background-color: #fff !important; /* Background color */
-      border-radius: 5px !important; /* Rounded corners */
-      transition: background-color 0.3s, color 0.3s !important;
-    }
-
-    /* Hover effect */
-    .custom-button:hover {
-      background-color: #fff !important; /* Hover background color */
-      color: #000 !important; /* Hover text color */
-    }
+      /* Hover effect */
+      .custom-button:hover {
+        background-color: #fff !important; /* Hover background color */
+        color: #000 !important; /* Hover text color */
+      }
     </style>
     <title>Bootstrap Modal on Double Click</title>
   </head>
+
   <body>
     <div class="container mt-5">
-      <h2>Activate Modal with JavaScript</h2>
+      <div
+        class="w3-row w3-bar w3-light-gray w3-border-top w3-border-bottom w3-border-black"
+      >
+        <!-- navigation bar for view navigation -->
+        <div class="w3-col w3-container" style="width: 35%">
+          <div class="w3-bar-item">
+            <button
+              class="w3-bar-item w3-button tablink w3-dark-gray"
+              onclick="openView(event,'main')"
+            >
+              Main Input Information
+            </button>
+            <button
+              class="w3-bar-item w3-button tablink"
+              onclick="openView(event,'lcinfo')"
+            >
+              LC Information
+            </button>
+            <button
+              class="w3-bar-item w3-button tablink"
+              onclick="openView(event,'transport')"
+            >
+              Transport Information
+            </button>
+            <button
+              class="w3-bar-item w3-button tablink"
+              onclick="openView(event,'print')"
+            >
+              Print
+            </button>
+          </div>
+        </div>
+
+        <div class="w3-col w3-container" style="width: 65%">
+          <div class="w3-bar-item w3-right w3-dropdown-hover">
+            <button class="w3-button">Settings</button>
+            <div class="w3-dropdown-content w3-bar-block">
+              <a
+                href="#"
+                class="w3-bar-item w3-button"
+                id="createBankDialogBoxButton"
+                >Create Bank</a
+              >
+              <a href="#" class="w3-bar-item w3-button">Create Customer</a>
+            </div>
+          </div>
+
+          <div class="w3-bar-item w3-right">
+            <div class="w3-container">
+              <div class="w3-row">
+                <!-- Search input -->
+                <div class="w3-col" style="width: 60%">
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    class="w3-input"
+                    style="width: 100%; background-color: white"
+                  />
+                </div>
+
+                <!-- Dropdown -->
+                <div class="w3-col" style="width: 35%">
+                  <select
+                    class="w3-select"
+                    style="
+                      background-color: white;
+                      padding: 0.65em 0% !important;
+                    "
+                  >
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="1">LC ID</option>
+                    <option value="2">Reference ID</option>
+                    <option value="3">Beneficiary Name</option>
+                  </select>
+                </div>
+
+                <!-- Search button -->
+                <div class="w3-col" style="width: 5%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
 
       <input
         type="text"
@@ -56,17 +141,22 @@
 
       <div class="modal-overlay" id="modalOverlay"></div>
 
-
-      <!-- Bootstrap Modal -->
-      <!-- <div class="modal fade" id="BeneficiaryModal1"> -->
-      <div class="modal fade" id="BeneficiaryModal1" role="dialog" tabindex="-1" 
-      aria-labelledby="BeneficiaryModalLabel1" aria-hidden="true">
-      
+      <!-- Preview Modal -->
+      <div
+        class="modal fade"
+        id="BeneficiaryModal1"
+        role="dialog"
+        tabindex="-1"
+        aria-labelledby="BeneficiaryModalLabel1"
+        aria-hidden="true"
+      >
         <div class="modal-dialog modal-xl">
           <div class="modal-content p-3">
             <!-- Modal Header -->
             <div class="modal-header">
-              <h1 class="modal-title fs-5 m-auto" id="DraftModalLabel">BENEFICIARY'S CERTIFICATE</h1>
+              <h1 class="modal-title fs-5 m-auto" id="DraftModalLabel">
+                BENEFICIARY'S CERTIFICATE
+              </h1>
             </div>
 
             <!-- Modal Body -->
@@ -74,62 +164,110 @@
               <div class="p-3 mb-3">
                 <div class="row">
                   <div class="col-md-5">
-                    <textarea class="form-control" rows="4" placeholder="Global Text" id="simpleDraftModelGlobal"></textarea>
+                    <textarea
+                      class="form-control"
+                      rows="4"
+                      placeholder="Global Text"
+                      id="simpleDraftModelGlobal"
+                    ></textarea>
                   </div>
 
-                  <div class="col-md-3">
-                  </div>
-            
+                  <div class="col-md-3"></div>
+
                   <div class="col-md-4 mt-5">
                     <div class="input-group">
                       <span class="input-group-text">LC Number</span>
-                      <input type="text" class="form-control" disabled id="simpleDraftModelShipperBene" placeholder="10000552">
+                      <input
+                        type="text"
+                        class="form-control"
+                        disabled
+                        id="simpleDraftModelShipperBene"
+                        placeholder="10000552"
+                      />
                     </div>
-
                   </div>
                 </div>
 
-                <hr style="height: 5px; border-width: 0; background-color: #000000 !important;">
+                <hr
+                  style="
+                    height: 5px;
+                    border-width: 0;
+                    background-color: #000000 !important;
+                  "
+                />
 
                 <div class="row">
                   <div class="col-md-4">
                     <div class="input-group mb-3">
                       <span class="input-group-text">Date</span>
-                      <input type="date" class="form-control" disabled id="simpleDraftModelShipperBene" placeholder="01/01/2000">
+                      <input
+                        type="date"
+                        class="form-control"
+                        disabled
+                        id="simpleDraftModelShipperBene"
+                        placeholder="01/01/2000"
+                      />
                     </div>
                   </div>
 
-                  <div class="col-md-2">
-                  </div>
-            
+                  <div class="col-md-2"></div>
+
                   <div class="col-md-6">
                     <div class="input-group mb-3">
-                      <p class="text-danger mx-2">If it is different than Ship Date</p>
+                      <p class="text-danger mx-2">
+                        If it is different than Ship Date
+                      </p>
                       <span class="input-group-text">Date</span>
-                      <input type="date" class="form-control" disabled id="simpleDraftModelShipperBene" placeholder="01/01/2000">
+                      <input
+                        type="date"
+                        class="form-control"
+                        disabled
+                        id="simpleDraftModelShipperBene"
+                        placeholder="01/01/2000"
+                      />
                     </div>
-
                   </div>
                 </div>
-                <hr style="height: 5px; border-width: 0; background-color: #000000 !important;">
+                <hr
+                  style="
+                    height: 5px;
+                    border-width: 0;
+                    background-color: #000000 !important;
+                  "
+                />
 
-
-
-                <div class="row mt-4">										
-                  <input type="text" class="p-3" style="width: 100%; border: 5px solid #000000; text-align: center; font-weight: bold; font-size: 26px;" value="BENEFICIARY'S CERTIFICATE">
+                <div class="row mt-4">
+                  <input
+                    type="text"
+                    class="p-3"
+                    style="
+                      width: 100%;
+                      border: 5px solid #000000;
+                      text-align: center;
+                      font-weight: bold;
+                      font-size: 26px;
+                    "
+                    value="BENEFICIARY'S CERTIFICATE"
+                  />
                 </div>
 
-                
                 <div class="row my-5">
-                  <textarea class="form-control" id="simpleDraftModelNegoBank" rows="5" placeholder="Enter text..."></textarea>
+                  <textarea
+                    class="form-control"
+                    id="simpleDraftModelNegoBank"
+                    rows="5"
+                    placeholder="Enter text..."
+                  ></textarea>
                 </div>
 
-                <div class="row mt-5" style="margin-top: 200px !important;">
-                  <textarea class="form-control" id="simpleDraftModelNegoBank" rows="5" placeholder="Enter text..."></textarea>
+                <div class="row mt-5" style="margin-top: 200px !important">
+                  <textarea
+                    class="form-control"
+                    id="simpleDraftModelNegoBank"
+                    rows="5"
+                    placeholder="Enter text..."
+                  ></textarea>
                 </div>
-
-
-                
               </div>
 
               <div class="row mt-2">
@@ -142,16 +280,56 @@
                   <p class="border-top p-1">Authorized Signature</p>
                 </div>
               </div>
+            </div>
 
-                  
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button"  data-dismiss="modal" class="close custom-button">Close</button>
-              </div>
-            
+            <div class="modal-footer">
+              <button
+                type="button"
+                data-dismiss="modal"
+                class="close custom-button"
+              >
+                Close
+              </button>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Create Bank Modal -->
+
+      <div
+        class="modal fade"
+        id="createBankModal"
+        role="dialog"
+        tabindex="-1"
+        aria-labelledby="createBankModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content p-3">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 m-auto" id="createBankModalTitle">
+                Create Bank
+              </h1>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+              <p>Sherry</p>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                data-dismiss="modal"
+                class="closeBank custom-button"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -174,6 +352,27 @@
 
         document.body.classList.remove("modal-open");
       });
+
+      document
+        .getElementById("createBankDialogBoxButton")
+        .addEventListener("click", function () {
+          document.getElementById("createBankModal").classList.add("show");
+          document.getElementById("createBankModal").style.display = "block";
+          document.getElementById("modalOverlay").style.display = "block";
+
+          document.body.classList.add("modal-open");
+        });
+
+      // Close the modal on modal close button click
+      document
+        .querySelector(".closeBank")
+        .addEventListener("click", function () {
+          document.getElementById("createBankModal").classList.remove("show");
+          document.getElementById("createBankModal").style.display = "none";
+          document.getElementById("modalOverlay").style.display = "none";
+
+          document.body.classList.remove("modal-open");
+        });
     </script>
   </body>
 </html>
