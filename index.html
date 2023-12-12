@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); 
+      z-index: 1050; 
+      display: none;
+    }
+
+    .custom-button {
+      display: inline-block !important;
+      padding: 10px 20px !important;
+      font-size: 16px !important;
+      font-weight: bold !important;
+      text-align: center !important;
+      text-decoration: none !important;
+      cursor: pointer !important;
+      border: 2px solid #000 !important; /* Border color */
+      color: #000 !important; /* Text color */
+      background-color: #fff !important; /* Background color */
+      border-radius: 5px !important; /* Rounded corners */
+      transition: background-color 0.3s, color 0.3s !important;
+    }
+
+    /* Hover effect */
+    .custom-button:hover {
+      background-color: #fff !important; /* Hover background color */
+      color: #000 !important; /* Hover text color */
+    }
+    </style>
+    <title>Bootstrap Modal on Double Click</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2>Activate Modal with JavaScript</h2>
+
+      <input
+        type="text"
+        class="w3-input w3-border w3-light-gray"
+        id="SimpleBENEFICIARYCertificateHomeTitle1"
+        value="BENEFICIARY'S CERTIFICATE"
+      />
+
+      <div class="modal-overlay" id="modalOverlay"></div>
+
+
+      <!-- Bootstrap Modal -->
+      <!-- <div class="modal fade" id="BeneficiaryModal1"> -->
+      <div class="modal fade" id="BeneficiaryModal1" role="dialog" tabindex="-1" 
+      aria-labelledby="BeneficiaryModalLabel1" aria-hidden="true">
+      
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content p-3">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 m-auto" id="DraftModalLabel">BENEFICIARY'S CERTIFICATE</h1>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+              <div class="p-3 mb-3">
+                <div class="row">
+                  <div class="col-md-5">
+                    <textarea class="form-control" rows="4" placeholder="Global Text" id="simpleDraftModelGlobal"></textarea>
+                  </div>
+
+                  <div class="col-md-3">
+                  </div>
+            
+                  <div class="col-md-4 mt-5">
+                    <div class="input-group">
+                      <span class="input-group-text">LC Number</span>
+                      <input type="text" class="form-control" disabled id="simpleDraftModelShipperBene" placeholder="10000552">
+                    </div>
+
+                  </div>
+                </div>
+
+                <hr style="height: 5px; border-width: 0; background-color: #000000 !important;">
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Date</span>
+                      <input type="date" class="form-control" disabled id="simpleDraftModelShipperBene" placeholder="01/01/2000">
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                  </div>
+            
+                  <div class="col-md-6">
+                    <div class="input-group mb-3">
+                      <p class="text-danger mx-2">If it is different than Ship Date</p>
+                      <span class="input-group-text">Date</span>
+                      <input type="date" class="form-control" disabled id="simpleDraftModelShipperBene" placeholder="01/01/2000">
+                    </div>
+
+                  </div>
+                </div>
+                <hr style="height: 5px; border-width: 0; background-color: #000000 !important;">
+
+
+
+                <div class="row mt-4">										
+                  <input type="text" class="p-3" style="width: 100%; border: 5px solid #000000; text-align: center; font-weight: bold; font-size: 26px;" value="BENEFICIARY'S CERTIFICATE">
+                </div>
+
+                
+                <div class="row my-5">
+                  <textarea class="form-control" id="simpleDraftModelNegoBank" rows="5" placeholder="Enter text..."></textarea>
+                </div>
+
+                <div class="row mt-5" style="margin-top: 200px !important;">
+                  <textarea class="form-control" id="simpleDraftModelNegoBank" rows="5" placeholder="Enter text..."></textarea>
+                </div>
+
+
+                
+              </div>
+
+              <div class="row mt-2">
+                <p><strong>CERTIFIED TRUE AND CORRECT</strong></p>
+                <p><strong>Beneficiary Name</strong></p>
+              </div>
+
+              <div class="row mt-5">
+                <div class="col-md-4 mt-3">
+                  <p class="border-top p-1">Authorized Signature</p>
+                </div>
+              </div>
+
+                  
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button"  data-dismiss="modal" class="close custom-button">Close</button>
+              </div>
+            
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("SimpleBENEFICIARYCertificateHomeTitle1")
+        .addEventListener("dblclick", function () {
+          document.getElementById("BeneficiaryModal1").classList.add("show");
+          document.getElementById("BeneficiaryModal1").style.display = "block";
+          document.getElementById("modalOverlay").style.display = "block";
+
+          document.body.classList.add("modal-open");
+        });
+
+      // Close the modal on modal close button click
+      document.querySelector(".close").addEventListener("click", function () {
+        document.getElementById("BeneficiaryModal1").classList.remove("show");
+        document.getElementById("BeneficiaryModal1").style.display = "none";
+        document.getElementById("modalOverlay").style.display = "none";
+
+        document.body.classList.remove("modal-open");
+      });
+    </script>
+  </body>
+</html>
