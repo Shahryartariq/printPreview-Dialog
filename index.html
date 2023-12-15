@@ -141,7 +141,7 @@
 
       <div class="modal-overlay" id="modalOverlay"></div>
 
-      <!-- Preview Modal -->
+      <!-- Preview Bene Modal -->
       <div
         class="modal fade"
         id="BeneficiaryModal1"
@@ -157,6 +157,9 @@
               <h1 class="modal-title fs-5 m-auto" id="DraftModalLabel">
                 BENEFICIARY'S CERTIFICATE
               </h1>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
 
             <!-- Modal Body -->
@@ -283,20 +286,14 @@
             </div>
 
             <div class="modal-footer">
-              <button
-                type="button"
-                data-dismiss="modal"
-                class="close custom-button"
-              >
-                Close
-              </button>
+            
+              
             </div>
           </div>
         </div>
       </div>
 
       <!-- Create Bank Modal -->
-
       <div
         class="modal fade"
         id="createBankModal"
@@ -312,6 +309,9 @@
               <h1 class="modal-title fs-5 m-auto" id="createBankModalTitle">
                 Create Bank
               </h1>
+              <button type="button" class="close closeBank" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
 
             <!-- Modal Body -->
@@ -320,17 +320,20 @@
             </div>
 
             <div class="modal-footer">
-              <button
+              <!-- <button
                 type="button"
                 data-dismiss="modal"
                 class="closeBank custom-button"
               >
                 Close
-              </button>
+              </button> -->
             </div>
           </div>
         </div>
       </div>
+
+
+      
     </div>
 
     <script>
@@ -342,7 +345,9 @@
           document.getElementById("modalOverlay").style.display = "block";
 
           document.body.classList.add("modal-open");
+
         });
+
 
       // Close the modal on modal close button click
       document.querySelector(".close").addEventListener("click", function () {
@@ -352,6 +357,19 @@
 
         document.body.classList.remove("modal-open");
       });
+
+      // Close modal if user clicks outside the modal
+       window.onclick = function (event) {
+        var modal = document.getElementById('BeneficiaryModal1');
+          if (event.target == modal) {
+            document.getElementById("BeneficiaryModal1").classList.remove("show");
+            document.getElementById("BeneficiaryModal1").style.display = "none";
+            document.getElementById("modalOverlay").style.display = "none";
+            document.body.classList.remove("modal-open");
+          }
+        } 
+
+
 
       document
         .getElementById("createBankDialogBoxButton")
